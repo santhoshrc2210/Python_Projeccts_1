@@ -1,5 +1,5 @@
 # Implementation of classic arcade game Pong
-# still needs some work, run in codeskulptor
+# works but still needs some changes, run in codeskulptor
 import simplegui
 import random
 
