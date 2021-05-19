@@ -143,4 +143,57 @@ frame.set_draw_handler(draw)
 # start frame
 frame.start()
 
+###################################################
+# Student should enter code below
+# Polyline drawing problem
+
+
+import simplegui
+import math
+
+polyline = []
+click_ctr=0
+point=[]
+# define mouseclick handler
+def click(pos):
+    global click_ctr,point
+    click_ctr+=1
+    if click_ctr==1:
+        point=(pos)
+    elif click_ctr==2:
+        point=list(point)
+        point.append(pos)
+        a=point.pop(0)
+        b=point.pop(0)
+        p=(a,b)
+        point.insert(0,p)
+    elif click_ctr>=3:
+        point.append(pos)
+    return point
+          
+# button to clear canvas
+def clear():
+    global click_ctr,point
+    click_ctr=0
+
+# define draw
+def draw(canvas):
+    global click_ctr,point
+    if click_ctr==1:
+        canvas.draw_point(point, 'Green')
+    elif click_ctr>=2:
+        canvas.draw_polyline(point, 5, 'Red')
+    elif click_ctr==0:
+        canvas.draw_polygon([(0, 0), (0, 300), (300, 300), (300,0)], 12, 'Black','Black')
+
+                          
+# create frame and register handlers
+frame = simplegui.create_frame("Echo click", 300, 200)
+frame.set_mouseclick_handler(click)
+frame.set_draw_handler(draw)
+frame.add_button("Clear", clear)
+
+# start frame
+frame.start()
+
 
